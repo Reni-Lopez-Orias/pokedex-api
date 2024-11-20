@@ -1,38 +1,71 @@
-.App {
-  text-align: center;
+.container_page {
+    background-color: white;
+    height: 80vh;
+    padding: 0px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.container_icons_input {
+    padding: 0px 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.logo {
+    height: 5rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+svg {
+    height: 30px;
 }
 
-.App-link {
-  color: #61dafb;
+input {
+    border: solid 1px gray;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* pantallas menores a  */
+@media screen and (max-width: 768px) {
+    .container_page {
+        width: 90vw;
+    }
+
+    .container_pokemon_list {
+        justify-content: flex-start;
+    }
+
+    .container_pokemon_list>div {
+        width: 150px;
+    }
+}
+
+/* pantallas mayores a  */
+@media screen and (min-width: 769px) {
+    .container_page {
+        width: 768px;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    input {
+        width: 360px !important;
+    }
+}
+
+.container_pokemon_list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: flex-start;
+}
+ 
+/* Estilos para pantallas pequeñas (cuando la pantalla es estrecha) */
+@media screen and (max-width: 767px) {
+    .container_pokemon_list {
+        justify-content: center;
+    }
+
+    .container_pokemon_list>div {
+        width: 45%;
+    }
 }
