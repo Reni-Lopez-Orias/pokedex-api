@@ -8,10 +8,11 @@ body{
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center
+    align-items: center;
+    font-family: Lato, sans-serif;
 }
 
-.img_card_pokemon{
+.logo_pokemon{
     width: 100px;
     height: 100px;
 }
