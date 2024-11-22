@@ -1,14 +1,19 @@
 .container_page {
     background-color: white;
-    height: 75vh;
+    height: 80vh;
     padding: 0px 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 0px;
-    margin-top: -31px;
+    margin-top: -20px;
 }
-
+span{
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;
+    font-weight: 800;
+    font-size: 30px;
+}
 .container_icons_input {
     padding: 0px 10px;
 }

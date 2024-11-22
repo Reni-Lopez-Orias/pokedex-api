@@ -49,10 +49,11 @@ function App() {
 
   }
 
-  const handlePokemonSelected = (pokemon) => {
-    setPokemonsSelected(pokemon);
-    console.log(pokemon);
+  const handlePokemonSelected = (pokemon) => { 
+    const abilities = pokemon.abilities.map(({ ability }) => ability);
+    pokemon.abilities = abilities; 
 
+    setPokemonsSelected(pokemon);
   }
 
   const handleScroll = (e) => {
@@ -106,16 +107,20 @@ function App() {
         pokemonSelected && (
           <div className='details_pokemon animate__animated animate__backInUp'>
 
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '0px' }} >
+              <img style={{ height: '250px', position: 'relative', bottom: '50px' }} src={`${pokemonSelected.sprites.other.dream_world.front_default}`} alt='pokemon' />
+            </div>
+
             <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span style={{ fontSize: '35px', color: 'white' }}>#0{pokemonSelected.id}</span>
-              <svg onClick={() => setPokemonsSelected(null)} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill='white' d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" /></svg>
+              <svg style={{ cursor: 'pointer' }} onClick={() => setPokemonsSelected(null)} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill='white' d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" /></svg>
             </div>
-            {/* <strong>#0{pokemonSelected.id}</strong>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} >
-              <img style={{ height: '150px', position: 'relative', bottom: '50px' }} src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/2.svg' alt='pokemon' />
 
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', marginBottom: '10px' }}>
+              <span> {pokemonSelected.name.toUpperCase()} </span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-around', width: '100%' }}>
+
+            <div className='mb-5' style={{ display: 'flex', justifyContent: 'space-around', width: '100%' }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0px 20px' }}>
                 <span>{pokemonSelected.height}</span>
                 <strong>Height</strong>
@@ -126,6 +131,111 @@ function App() {
               </div>
 
             </div>
+
+            <div className='flex items-center justify-center '>
+              <ul className="mx-auto grid max-w-full w-full grid-cols-3 gap-x-5 px-8">
+                <li className="">
+                  <input className="peer sr-only" type="radio" value="yes" name="answer" id="yes" checked />
+                  <label className="flex justify-center cursor-pointer rounded-full border border-gray-300 bg-white py-2 px-4 hover:bg-gray-50 focus:outline-none peer-checked:border-transparent peer-checked:ring-2 peer-checked:ring-indigo-500 transition-all duration-500 ease-in-out" for="yes">Stats</label>
+
+                  <div style={{ width: '99%', height: '100% ' }} className="absolute bg-white shadow-lg left-0 p-6 border mt-2 border-indigo-300 rounded-lg mx-auto transition-all duration-500 ease-in-out translate-x-40 opacity-0 invisible peer-checked:opacity-100 peer-checked:visible peer-checked:translate-x-1">
+
+                    {
+                      pokemonSelected.stats.map((stat) => (
+                        <div style={{ display: 'flex', width: '100%', alignItems: 'center', borderBottom: 'solid 1px lightgray', padding: '10px 0px' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '40%' }}>
+                            <span style={{ color: 'black' }}  > {stat.stat.name.toUpperCase()} </span>
+                            <span class=" text-xs text-yellow-400"> {stat.base_stat} </span>
+                          </div>
+                          <div style={{ width: '60%', marginLeft: '10px' }} class="  h-4 relative w-60 rounded-full overflow-hidden">
+                            <div class=" w-full h-full bg-gray-200 absolute "></div>
+                            <div class=" h-full bg-yellow-400 sm:bg-green-500 absolute" style={{ width: `${stat.base_stat}%` }}></div>
+                          </div>
+                        </div>
+                      ))
+                    }
+
+
+
+                  </div>
+                </li>
+
+                <li className="">
+                  <input className="peer sr-only" type="radio" value="no" name="answer" id="no" />
+                  <label className="flex justify-center cursor-pointer rounded-full border border-gray-300 bg-white py-2 px-4 hover:bg-gray-50 focus:outline-none peer-checked:border-transparent peer-checked:ring-2 peer-checked:ring-indigo-500 transition-all duration-500 ease-in-out" for="no">Abilities</label>
+
+                  <div style={{ width: '99%', height: '100% ' }} className="absolute bg-white shadow-lg left-0 p-6 border mt-2 border-indigo-300 rounded-lg mx-auto transition-all duration-500 ease-in-out translate-x-40 opacity-0 invisible peer-checked:opacity-100 peer-checked:visible peer-checked:translate-x-1">
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+
+                      <div class="mt-8 flex">
+                        <div style={{
+                          display: 'flex',
+                          flexWrap: 'wrap', // Permite que los botones se acomoden en nuevas filas
+                          gap: '10px', // Espacio entre los botones
+                          justifyContent: 'flex-start', // Alinea los botones hacia la izquierda
+                        }}>
+                          {
+                            pokemonSelected.abilities.map((abilitie) => (
+                              <button key={abilitie.name} type="button" style={{ background: 'lightgray', margin: '5px' }} class="rounded-full px-4 mr-2 text-white p-2 rounded  leading-none flex items-center">
+                                {abilitie.name.toUpperCase()}
+                              </button>
+                            ))
+                          }
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <li className="">
+                  <input className="peer sr-only" type="radio" value="yesno" name="answer" id="yesno" />
+                  <label className="flex justify-center cursor-pointer rounded-full border border-gray-300 bg-white py-2 px-4 hover:bg-gray-50 focus:outline-none peer-checked:border-transparent peer-checked:ring-2 peer-checked:ring-indigo-500 transition-all duration-500 ease-in-out " for="yesno">Moves</label>
+
+                  <div style={{ width: '99%', height: '90%' }} className="absolute bg-white shadow-lg left-0 p-6 border mt-2 border-indigo-300 rounded-lg mx-auto transition-all duration-500 ease-in-out translate-x-40 opacity-0 invisible peer-checked:opacity-100 peer-checked:visible peer-checked:translate-x-1">
+                    <div className="mt-8">
+                      <div style={{
+                        display: 'flex',
+                        flexWrap: 'wrap', // Permite que los botones se acomoden en nuevas filas
+                        gap: '10px', // Espacio entre los botones
+                        justifyContent: 'flex-start', // Alinea los botones hacia la izquierda
+                      }}>
+                        {
+                          pokemonSelected.moves.map((move) => (
+                            <button
+                              key={move.move.name}
+                              type="button"
+                              style={{
+                                background: 'lightgray',
+                                margin: '5px',
+                                padding: '10px 20px', // Ajusta el tamaño de los botones
+                                fontSize: '14px', // Ajusta el tamaño del texto
+                              }}
+                              className="rounded-full text-white flex items-center"
+                            >
+                              {move.move.name.toUpperCase()}
+                            </button>
+                          ))
+                        }
+                      </div>
+                    </div>
+                  </div>
+
+                </li>
+              </ul>
+
+            </div>
+
+          </div>
+        )
+      }
+
+      {/* <strong>#0{pokemonSelected.id}</strong>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} >
+              <img style={{ height: '150px', position: 'relative', bottom: '50px' }} src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/2.svg' alt='pokemon' />
+
+            </div>
+            
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
 
@@ -145,11 +255,6 @@ function App() {
               <span style={{ fontSize: '20px' }}>{pokemonSelected.name.toUpperCase()}</span>
 
             </div> */}
-          </div>
-        )
-      }
-
-
 
     </div>
   );
